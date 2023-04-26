@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const request = require('request');
-const http = require('https');
 var reader = require("xlsx");
 const nodemailer = require('nodemailer');
 app.use(bodyParser.urlencoded({
@@ -29,7 +27,7 @@ for(let i=0;i<sheets.length;i++){
 }
 
 console.log(data)
-//
+
 
 
 app.get("/", function(req, res) {
@@ -64,9 +62,6 @@ app.post("/",function(req,res){
       console.log("Sent "+ info.response);
   })
 
-
-  
-
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const client = require('twilio')(accountSid, authToken);
@@ -75,7 +70,7 @@ app.post("/",function(req,res){
   .create({body: sub, from: '+14068046817', to: mobile})
   .then(message => console.log(message.sid));
   
-  res.sendFile(__dirname+'/success.html')
+  res.sendFile(__dirname + '/success.html')
 
 })
 
